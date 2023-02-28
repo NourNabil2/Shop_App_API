@@ -1,13 +1,12 @@
-
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/components/Model_Categories.dart';
 import 'package:shop/cubit/states.dart';
 import '../Dio_Network/Dio helper.dart';
 import '../Dio_Network/end_points.dart';
-
+import '../components/Model_Categories.dart';
 import '../components/Model_Home.dart';
 import '../main.dart';
 import '../pages/HomePage.dart';
@@ -23,11 +22,11 @@ class NewsCubit extends Cubit<NewStates>
   static NewsCubit get(context) => BlocProvider.of(context);
   int current=2;
   List<BottomNavigationBarItem> Bottomsheet = [
-    BottomNavigationBarItem(icon: Icon(Icons.sports_baseball) ,label: 'Favorites'),
-    BottomNavigationBarItem(icon: Icon(Icons.sports_baseball) ,label: 'Favorites'),
-    BottomNavigationBarItem(icon: Icon(Icons.sports_baseball,color: Colors.transparent),label: '' ),
-    BottomNavigationBarItem(icon: Icon(Icons.sports_baseball),label: 'Categories' ),
-    BottomNavigationBarItem(icon: Icon(Icons.sports_baseball),label: 'Categories' ),
+    BottomNavigationBarItem(icon: Icon(CupertinoIcons.settings),label: 'Settings'),
+    BottomNavigationBarItem(icon: Icon(Icons.favorite_border), activeIcon: Icon(Icons.favorite ,color: Colors.redAccent )  ,label: 'Category'),
+    BottomNavigationBarItem(icon: Icon(Icons.abc ,color: Colors.transparent),label: '' ),
+    BottomNavigationBarItem(icon: Icon(Icons.category),label: 'Categories' ),
+    BottomNavigationBarItem(icon: Icon(Icons.shopping_basket_outlined),label: 'Categories' ),
 
   ];
   List pages = [
@@ -58,9 +57,14 @@ void getAllData()
   }).catchError((e){print( 'error nour :  ${e.toString()}' ); emit(ErrorHomeState());});
 }
 
-// CategoriesModel? CategoriesModel;
-
-
+CategoriesModel? categoriesModel ;
+void getallCategories()
+{
+  DioHelper.getdata(Url: categories ,token: token).then((value) {
+    categoriesModel = CategoriesModel.fromjson(value.data);
+    emit(EnterCategoriesState());
+  }).catchError((e){print('getallCategories erorr : ${e.toString()}'); emit(ErrorCategoriesState()); });
+}
 
 
 }

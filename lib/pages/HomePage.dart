@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/pages/search.dart';
 
+import '../components/Model_Categories.dart';
 import '../components/Model_Home.dart';
 import '../cubit/cubits.dart';
 import '../cubit/states.dart';
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
         },
     builder: (context, state) {
       NewsCubit cubit = NewsCubit.get(context);
-      return cubit.homeModelData != null ? page() : Center(child: CircularProgressIndicator(color:Colors.deepPurple ,)) ;
+      return cubit.homeModelData !=null && cubit.categoriesModel != null ? page() : Center(child: CircularProgressIndicator(color:Colors.deepPurple ,)) ;
     }
     );
 
@@ -47,6 +48,7 @@ class HomePage extends StatelessWidget {
         NewsCubit cubit = NewsCubit.get(context);
         return Scaffold(
           body: Container(
+            color: Colors.grey[300],
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics(),
@@ -54,49 +56,16 @@ class HomePage extends StatelessWidget {
               shrinkWrap: true,
               slivers: [
                 buildSliverAppBar(cubit.homeModelData as HomeModelData),
-                SliverGrid(delegate: SliverChildListDelegate(
-                    List.generate(cubit.homeModelData!.data!.products.length, (index) => Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            alignment: Alignment.bottomLeft,
-                              children: [
-                            Image(image: NetworkImage(cubit.homeModelData?.data?.products[index].image as String) , height: 200 ,width: double.infinity) ,
-                                if (cubit.homeModelData?.data?.products[index].discount != 0)
-                            Container(color: Colors.green,padding: EdgeInsets.all(4),
-                              child: Text('Discount',style: TextStyle(color: Colors.white ,fontSize: 12.0 )),)
-                          ]),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(cubit.homeModelData?.data?.products[index].name as String , maxLines: 2 ,overflow: TextOverflow.ellipsis, style: TextStyle(height: 1.3 ,fontSize: 15),),
-                                Row(
-                                  children: [
-                                    Text('${cubit.homeModelData!.data?.products[index].price}'  ,style: TextStyle(color: Colors.blue),),
-                                    SizedBox(width: 5,),
-                                    if (cubit.homeModelData?.data?.products[index].discount != 0)
-                                    Text('${cubit.homeModelData!.data?.products[index].old_price}'  ,
-                                      style: TextStyle(decoration: TextDecoration.lineThrough,color: Colors.grey),),
-                                    Spacer(),
-                                    IconButton(onPressed: () {
-
-                                    }, icon:Icon( Icons.favorite_border ,) )
-
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ))), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 1.0 ,mainAxisSpacing: 1.0, childAspectRatio: 1/1.78, )),
-
-
+                SliverToBoxAdapter(child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0 , top: 25,bottom: 10.0),
+                  child: Text('Categories',style: TextStyle(color: Colors.black ,fontSize: 25 ,fontWeight: FontWeight.bold ),),
+                )),
+                buildListViewH(cubit.categoriesModel as CategoriesModel ),
+                SliverToBoxAdapter(child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0 ,top: 10),
+                  child: Text('New Products',style: TextStyle(color: Colors.black ,fontSize:25 ,fontWeight: FontWeight.bold )),
+                )),
+                buildGridView(cubit.homeModelData as HomeModelData),
               ],
             ),
           ),
@@ -148,4 +117,87 @@ class HomePage extends StatelessWidget {
 
     );
   }
+  Widget buildListViewH(CategoriesModel model) {
+    return SliverToBoxAdapter(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Container(
+          height: 100.0,
+          child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount: model.data?.data.length,
+          itemBuilder: (context, index) {
+      return Container(
+          width: 100.0,
+          child: Card(
+            child: Column(
+              children: [
+                Container( width: double.infinity ,child: Text('${model.data?.data[index].name}', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold ),overflow: TextOverflow.ellipsis,maxLines: 1,textAlign: TextAlign.center, )),
+                Image( image: NetworkImage( '${model.data?.data[index].image}' )  ,height: 70.0 ,fit: BoxFit.cover),
+              ],
+            ),
+          ),
+      );
+    },
+    ),
+    ),
+        )
+    );
+  }
+  Widget buildGridView(HomeModelData model) {
+    return SliverGrid(delegate: SliverChildListDelegate(
+        List.generate(model.data!.products.length, (index) => Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            width: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: Colors.white,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image(image: NetworkImage(model.data?.products[index].image as String) , height: 200 ,width: double.infinity),
+                      ) ,
+                      if (model.data?.products[index].discount != 0)
+                        Container(padding: EdgeInsets.all(4),decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.only(topRight: Radius.elliptical(80, 25) ,bottomRight: Radius.elliptical(80, 25))),
+                          child: Text('Discount',style: TextStyle(color: Colors.white ,fontSize: 12.0 )),)
+                    ]),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(model.data?.products[index].name as String , maxLines: 2 ,overflow: TextOverflow.ellipsis, style: TextStyle(height: 1.3 ,fontSize: 15),),
+                      Row(
+                        children: [
+                          Text('${model.data?.products[index].price}'  ,style: TextStyle(color: Colors.blue),),
+                          SizedBox(width: 5,),
+                          if (model.data?.products[index].discount != 0)
+                            Text('${model.data?.products[index].old_price}'  ,
+                              style: TextStyle(decoration: TextDecoration.lineThrough,color: Colors.grey),),
+                          Spacer(),
+                          IconButton(onPressed: () {
+
+                          }, icon:Icon( Icons.favorite_border ,) )
+
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        ))), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 1.0 ,mainAxisSpacing: 1.0, childAspectRatio: 1/1.55, )) ;
+  }
+
 }

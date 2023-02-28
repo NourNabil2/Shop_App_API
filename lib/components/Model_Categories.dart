@@ -2,10 +2,11 @@ class CategoriesModel
 {
   bool? status ;
   ALLDataCategories? data;
+
   CategoriesModel.fromjson(Map<String, dynamic> json )
   {
     status = json['status'];
-    data = json['data'];
+    data = ALLDataCategories.fromjson(json['data']);
 
   }
 }
@@ -13,13 +14,14 @@ class CategoriesModel
 class ALLDataCategories
 {
   int? current_page;
-  List<Listdata>? data;
+  List<Listdata> data = [];
 
   ALLDataCategories.fromjson(Map<String ,dynamic> json)
   {
     current_page=json['current_page'];
+
     json['data'].forEach((e){
-      data?.add(Listdata.fromjson(json['data']));
+      data.add(Listdata.fromjson(e));
     });
   }
 }
