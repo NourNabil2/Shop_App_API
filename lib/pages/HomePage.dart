@@ -67,7 +67,6 @@ class HomePage extends StatelessWidget {
                                 if (cubit.homeModelData?.data?.products[index].discount != 0)
                             Container(color: Colors.green,padding: EdgeInsets.all(4),
                               child: Text('Discount',style: TextStyle(color: Colors.white ,fontSize: 12.0 )),)
-
                           ]),
                           SizedBox(height: 10),
                           Padding(

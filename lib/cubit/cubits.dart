@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/cubit/states.dart';
 import '../Dio_Network/Dio helper.dart';
 import '../Dio_Network/end_points.dart';
+
 import '../components/Model_Home.dart';
 import '../main.dart';
 import '../pages/HomePage.dart';
@@ -56,6 +57,11 @@ void getAllData()
 
   }).catchError((e){print( 'error nour :  ${e.toString()}' ); emit(ErrorHomeState());});
 }
+
+// CategoriesModel? CategoriesModel;
+
+
+
 
 }
 

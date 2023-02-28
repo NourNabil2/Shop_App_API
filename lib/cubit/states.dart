@@ -9,3 +9,7 @@ class LoadingHomeState extends NewStates{}
 class EnterHomeState extends NewStates{}
 
 class ErrorHomeState extends NewStates{}
+
+class EnterCategoriesState extends NewStates{}
+
+class ErrorCategoriesState extends NewStates{}
