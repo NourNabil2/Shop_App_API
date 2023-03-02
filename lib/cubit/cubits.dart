@@ -10,7 +10,7 @@ import '../components/Model_Categories.dart';
 import '../components/Model_Home.dart';
 import '../main.dart';
 import '../pages/HomePage.dart';
-import '../pages/games.dart';
+import '../pages/Categorise_Page.dart';
 import '../pages/search.dart';
 
 class NewsCubit extends Cubit<NewStates>
@@ -30,8 +30,8 @@ class NewsCubit extends Cubit<NewStates>
 
   ];
   List pages = [
-    games(),
     search(),
+    Caregories(),
     HomePage(),
 
   ] ;
