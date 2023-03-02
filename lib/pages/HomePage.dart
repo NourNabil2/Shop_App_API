@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 15.0 ,top: 10),
                   child: Text('New Products',style: TextStyle(color: Colors.black ,fontSize:25 ,fontWeight: FontWeight.bold )),
                 )),
-                buildGridView(cubit.homeModelData as HomeModelData),
+                buildGridView(cubit.homeModelData as HomeModelData , cubit),
               ],
             ),
           ),
@@ -145,7 +145,7 @@ class HomePage extends StatelessWidget {
         )
     );
   }
-  Widget buildGridView(HomeModelData model) {
+  Widget buildGridView(HomeModelData model, NewsCubit cubit) {
     return SliverGrid(delegate: SliverChildListDelegate(
         List.generate(model.data!.products.length, (index) => Padding(
           padding: const EdgeInsets.all(15.0),
@@ -186,7 +186,7 @@ class HomePage extends StatelessWidget {
                           Spacer(),
                           IconButton(onPressed: () {
 
-                          }, icon:Icon( Icons.favorite_border ,) )
+                          }, icon:cubit.fav[model.data?.products[index].id] == false ? Icon( Icons.favorite_border ,) : Icon( Icons.favorite ,color: Colors.red,) )
 
                         ],
                       ),

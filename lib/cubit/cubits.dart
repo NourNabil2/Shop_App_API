@@ -9,6 +9,7 @@ import '../Dio_Network/end_points.dart';
 import '../components/Model_Categories.dart';
 import '../components/Model_Home.dart';
 import '../main.dart';
+import '../pages/Favorites_Page.dart';
 import '../pages/HomePage.dart';
 import '../pages/Categorise_Page.dart';
 import '../pages/search.dart';
@@ -31,9 +32,9 @@ class NewsCubit extends Cubit<NewStates>
   ];
   List pages = [
     search(),
-    Caregories(),
+    Favorite(),
     HomePage(),
-
+    Caregories(),
   ] ;
 void ChangePage (index)
 {
@@ -41,13 +42,23 @@ void ChangePage (index)
   emit(NewBottomState());
 }
 
+
+
+
+
+
 HomeModelData? homeModelData;
 void getAllData()
 {
   emit(LoadingHomeState());
   DioHelper.getdata(Url: Home ,token: token ).then((value) {
     homeModelData = HomeModelData.fromJson(value.data );
+    homeModelData!.data?.products.forEach((element) {
+      fav.addAll({
+        element.id : element.in_favorites ,
+      });
 
+    })  ;
     // print(value.data.toString());
     // print(homeModelData!.data?.banners[0].image);
     emit(EnterHomeState());
@@ -66,6 +77,11 @@ void getallCategories()
   }).catchError((e){print('getallCategories erorr : ${e.toString()}'); emit(ErrorCategoriesState()); });
 }
 
+  Map<int , bool? > fav ={};
+void ChangeFAV()
+{
+
+}
 
 }
 
