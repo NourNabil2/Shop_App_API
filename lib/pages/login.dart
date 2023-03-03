@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_toastr/flutter_toastr.dart';
 
 import '../Dio_Network/cash_save.dart';
+import '../components/Model_login.dart';
 import '../components/component.dart';
 import '../cubit/shop_login_cubit.dart';
 import '../cubit/shop_login_state.dart';
@@ -37,10 +38,13 @@ class _loginState extends State<login> {
               {
                 if(state.logindata.status == true )
               {
+                print('aasdasdasdasd 2 token :');
+                print('');
               FlutterToastr.show('${state.logindata.message}', context, duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
-              CashSaver.SaveData(key: 'token', value: '${state.logindata.token }').then((value)
+              CashSaver.SaveData(key: 'token', value: state.logindata.data?.token ).then((value)
               {
-                print(value.toString());
+                print('aasdasdasdasd token :');
+                print(state.logindata.data?.token);
                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainPage(),), (Route<dynamic>route) => false);
                 passwaordcontroller.clear();
 

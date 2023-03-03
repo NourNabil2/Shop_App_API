@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
 import 'package:shop/pages/search.dart';
 
 import '../components/Model_Categories.dart';
@@ -20,6 +21,12 @@ class HomePage extends StatelessWidget {
     return BlocConsumer<NewsCubit, NewStates>
         (
         listener: (context, state) {
+          if (state is EnterFAViesState )
+            {
+              if (state.favData.status == true)
+              FlutterToastr.show('${state.favData.message}', context,duration: FlutterToastr.lengthLong, backgroundColor: Colors.redAccent,position: FlutterToastr.bottom);
+            }
+
           // Mainbottom(namebottom: 'sighout', onpress: () {
           //   Navigator.pushAndRemoveUntil(
           //       context, MaterialPageRoute(builder: (context) => login(),), (
@@ -91,7 +98,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          expandedHeight: 300,
+          expandedHeight: 280,
           pinned: true,
           stretch: true,
           backgroundColor: Colors.white,
@@ -171,7 +178,7 @@ class HomePage extends StatelessWidget {
                     ]),
                 SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -185,7 +192,7 @@ class HomePage extends StatelessWidget {
                               style: TextStyle(decoration: TextDecoration.lineThrough,color: Colors.grey),),
                           Spacer(),
                           IconButton(onPressed: () {
-
+                            cubit.ChangeFAV(model.data?.products[index].id);
                           }, icon:cubit.fav[model.data?.products[index].id] == false ? Icon( Icons.favorite_border ,) : Icon( Icons.favorite ,color: Colors.red,) )
 
                         ],
@@ -197,7 +204,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-        ))), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 1.0 ,mainAxisSpacing: 1.0, childAspectRatio: 1/1.55, )) ;
+        ))), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 1.0 ,mainAxisSpacing: 1.0, childAspectRatio: 1/1.88, )) ;
   }
 
 }

@@ -12,14 +12,16 @@ class Caregories extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewsCubit, NewStates>(
-        builder: (BuildContext context, state) { return ListView.separated(itemBuilder:(context, index) {
+      listener: (BuildContext context, Object? state) {  },
+        builder: (BuildContext context, state) {
+          return ListView.separated(itemBuilder:(context, index) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
-                Image( image: NetworkImage( '${NewsCubit.get(context).categoriesModel?.data?.data[index].image}' )  ,height: 120.0 ,fit: BoxFit.cover),
+                Image( image: NetworkImage( '${NewsCubit.get(context).categoriesModel?.data?.data[index].image}' )  ,height: 100.0 ,width: 100,fit: BoxFit.cover),
                 SizedBox(width: 20,),
-                Text('${NewsCubit.get(context).categoriesModel?.data?.data[index].name}',style: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),),
+                Text('${NewsCubit.get(context).categoriesModel?.data?.data[index].name}',style: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold,),overflow: TextOverflow.fade),
                 Spacer(),
                 IconButton(onPressed: () {
 
@@ -28,7 +30,7 @@ class Caregories extends StatelessWidget
             ),
           );
         }, separatorBuilder: (context, index) { return SizedBox(height: 10);} , itemCount: NewsCubit.get(context).categoriesModel!.data!.data.length);  },
-        listener: (BuildContext context, Object? state) {  },
+
     );
 
 

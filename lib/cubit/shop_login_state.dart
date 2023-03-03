@@ -16,7 +16,7 @@ class LoginLoadingState extends ShopLoginState{}
 class PasswordHiddeState extends ShopLoginState{}
 
 class LoginError extends ShopLoginState{
-  final  error;
+  final error;
 
   LoginError(this.error);
 }

@@ -18,7 +18,8 @@ void main() async{
   if (onboarding != null )
     {
       if (token != null )
-        {widget = MainPage();}
+        {widget = MainPage();
+        print('sadsadasd asd asd  $token ');}
       else
         {widget = login();}
     }

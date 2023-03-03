@@ -7,7 +7,9 @@ import 'package:shop/cubit/states.dart';
 import '../Dio_Network/Dio helper.dart';
 import '../Dio_Network/end_points.dart';
 import '../components/Model_Categories.dart';
+import '../components/Model_FAV.dart';
 import '../components/Model_Home.dart';
+import '../components/Model_login.dart';
 import '../main.dart';
 import '../pages/Favorites_Page.dart';
 import '../pages/HomePage.dart';
@@ -24,7 +26,7 @@ class NewsCubit extends Cubit<NewStates>
   int current=2;
   List<BottomNavigationBarItem> Bottomsheet = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.settings),label: 'Settings'),
-    BottomNavigationBarItem(icon: Icon(Icons.favorite_border), activeIcon: Icon(Icons.favorite ,color: Colors.redAccent )  ,label: 'Category'),
+    BottomNavigationBarItem(icon: Icon(Icons.favorite_border), activeIcon: Icon(Icons.favorite ,color: Colors.redAccent )  ,label: 'Favorites'),
     BottomNavigationBarItem(icon: Icon(Icons.abc ,color: Colors.transparent),label: '' ),
     BottomNavigationBarItem(icon: Icon(Icons.category),label: 'Categories' ),
     BottomNavigationBarItem(icon: Icon(Icons.shopping_basket_outlined),label: 'Categories' ),
@@ -57,8 +59,8 @@ void getAllData()
       fav.addAll({
         element.id : element.in_favorites ,
       });
-
     })  ;
+
     // print(value.data.toString());
     // print(homeModelData!.data?.banners[0].image);
     emit(EnterHomeState());
@@ -78,9 +80,30 @@ void getallCategories()
 }
 
   Map<int , bool? > fav ={};
-void ChangeFAV()
-{
+  ShopModelData? loginData;
+  FAVData? favData;
 
+void ChangeFAV(int productID)
+{
+  fav[productID] = !fav[productID]!;
+  //emit(EnterFAViesState(favData!));
+DioHelper.postdata(path: favorites,
+    token: token,
+    data:{
+'product_id' : productID
+}
+
+).then((value) => {
+  favData = FAVData.fromJson(value.data),
+  print(value.data.toString()),
+  if (!favData!.status! )
+    {
+    fav[productID] = !fav[productID]!
+    },
+
+  emit(EnterFAViesState(favData!)),
+
+}).catchError((e){emit(ErrorFAViesState());fav[productID] = !fav[productID]!;});
 }
 
 }

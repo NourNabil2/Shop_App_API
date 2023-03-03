@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../components/Model_login.dart';
+
 
 class DioHelper {
   static late Dio dio;
@@ -26,14 +28,14 @@ class DioHelper {
     return await dio.get(Url, queryParameters: query);
   }
 
-
-
   static Future<Response> postdata({
     required String path,
     required Map<String, dynamic> data,
     Map<String, dynamic>? query,
     String lang = 'en',
     String? token,
+
+
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',

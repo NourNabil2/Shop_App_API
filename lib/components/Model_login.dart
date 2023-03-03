@@ -3,6 +3,20 @@ class ShopModelData
   bool? status ;
   String? message ;
 
+  datalogin? data;
+
+
+  ShopModelData.fromJson(Map<String,dynamic> json)
+  {
+    status = json['status'];
+    message = json['message'];
+    data=datalogin.fromJson(json['data']);
+
+}
+
+}
+class datalogin
+{
   int? id;
   String? name;
   String? email;
@@ -10,10 +24,9 @@ class ShopModelData
   String?image;
   String? token;
   int? credit;
-  ShopModelData.fromJson(Map<String,dynamic> json)
+
+  datalogin.fromJson(Map<String,dynamic> json)
   {
-    status = json['status'];
-    message = json['message'];
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -21,6 +34,5 @@ class ShopModelData
     image = json['image'];
     token = json['token'];
     credit = json['credit'];
-}
-
+  }
 }

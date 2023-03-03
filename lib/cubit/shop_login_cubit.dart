@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/cubit/shop_login_state.dart';
+import 'package:shop/main.dart';
 
 import '../Dio_Network/Dio helper.dart';
 import '../Dio_Network/end_points.dart';
@@ -20,6 +21,7 @@ class ShopLoginCubit extends Cubit<ShopLoginState> {
     emit(LoginLoadingState());
 
     DioHelper.postdata(
+      token: token,
         path: Login,
         data: {
       'email': email,
