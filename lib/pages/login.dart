@@ -38,12 +38,10 @@ class _loginState extends State<login> {
               {
                 if(state.logindata.status == true )
               {
-                print('aasdasdasdasd 2 token :');
-                print('');
               FlutterToastr.show('${state.logindata.message}', context, duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
               CashSaver.SaveData(key: 'token', value: state.logindata.data?.token ).then((value)
               {
-                print('aasdasdasdasd token :');
+                print('token :');
                 print(state.logindata.data?.token);
                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainPage(),), (Route<dynamic>route) => false);
                 passwaordcontroller.clear();

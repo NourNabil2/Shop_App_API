@@ -1,19 +1,19 @@
-class Model_GETFavorite {
+class ModelGETFavorite {
   bool? status;
   Null? message;
-  FavData? data;
+  Data? data;
 
-  Model_GETFavorite.fromJson(Map<String, dynamic> json) {
+  ModelGETFavorite.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new FavData.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
 }
 
 class Data {
   int? currentPage;
-  List<FavData>? data;
+  List<FavData> data=[];
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -30,7 +30,7 @@ class Data {
     if (json['data'] != null) {
       data = <FavData>[];
       json['data'].forEach((v) {
-        data!.add(new FavData.fromJson(v));
+        data.add(new FavData.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];

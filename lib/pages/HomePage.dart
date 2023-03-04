@@ -23,8 +23,8 @@ class HomePage extends StatelessWidget {
         listener: (context, state) {
           if (state is EnterFAViesState )
             {
-              if (state.favData.status == true)
-              FlutterToastr.show('${state.favData.message}', context,duration: FlutterToastr.lengthLong, backgroundColor: Colors.redAccent,position: FlutterToastr.bottom);
+              if (state.favDatastate.status == true)
+              FlutterToastr.show('${state.favDatastate.message}', context,duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
             }
 
           // Mainbottom(namebottom: 'sighout', onpress: () {
@@ -105,11 +105,6 @@ class HomePage extends StatelessWidget {
           title: Text('ShopApp',style: TextStyle(color: Colors.black),) ,
           actions: [ IconButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder:  (context) => search(), )); }, icon: Icon(CupertinoIcons.search,color: Colors.black,) )],
           flexibleSpace: FlexibleSpaceBar(
-            // stretchModes: const <StretchMode>[
-            //   StretchMode.zoomBackground,
-            //   StretchMode.blurBackground,
-            //   StretchMode.fadeTitle,
-            // ],
           centerTitle: true,
             background: CarouselSlider(items: model.data?.banners.map( (e) => Image(image: NetworkImage('${e.image }'),width: double.infinity,height: double.infinity ,fit: BoxFit.fill,) ).toList(),
 

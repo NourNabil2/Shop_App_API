@@ -17,9 +17,17 @@ class EnterCategoriesState extends NewStates{}
 class ErrorCategoriesState extends NewStates{}
 
 class EnterFAViesState extends NewStates{
-  final FAVData favData;
+  final FAVData favDatastate;
 
-  EnterFAViesState(this.favData);
+  EnterFAViesState(this.favDatastate);
 }
 
 class ErrorFAViesState extends NewStates{}
+
+class GETFAViesState extends NewStates{}
+
+class ChanheFAVState extends NewStates{}
+
+class LoadingFAVState extends NewStates{}
+
+class ErorrGETFAViesState extends NewStates{}

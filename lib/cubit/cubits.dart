@@ -8,6 +8,7 @@ import '../Dio_Network/Dio helper.dart';
 import '../Dio_Network/end_points.dart';
 import '../components/Model_Categories.dart';
 import '../components/Model_FAV.dart';
+import '../components/Model_GETfav.dart';
 import '../components/Model_Home.dart';
 import '../components/Model_login.dart';
 import '../main.dart';
@@ -75,9 +76,14 @@ void getallCategories()
 {
   DioHelper.getdata(Url: categories ,token: token).then((value) {
     categoriesModel = CategoriesModel.fromjson(value.data);
+    print('data fav:222 ');
     emit(EnterCategoriesState());
-  }).catchError((e){print('getallCategories erorr : ${e.toString()}'); emit(ErrorCategoriesState()); });
+  }).catchError((e){print('Categories erorr : ${e.toString()}'); emit(ErrorCategoriesState()); });
 }
+
+
+
+
 
   Map<int , bool? > fav ={};
   ShopModelData? loginData;
@@ -85,8 +91,11 @@ void getallCategories()
 
 void ChangeFAV(int productID)
 {
+
+
   fav[productID] = !fav[productID]!;
-  //emit(EnterFAViesState(favData!));
+  emit(ChanheFAVState());
+
 DioHelper.postdata(path: favorites,
     token: token,
     data:{
@@ -94,17 +103,35 @@ DioHelper.postdata(path: favorites,
 }
 
 ).then((value) => {
+
   favData = FAVData.fromJson(value.data),
-  print(value.data.toString()),
-  if (!favData!.status! )
+  if ( favData!.status == false  )
     {
     fav[productID] = !fav[productID]!
+    }
+  else
+    {
+    emit(LoadingFAVState())
     },
 
-  emit(EnterFAViesState(favData!)),
+      emit(EnterFAViesState(favData!)),
 
-}).catchError((e){emit(ErrorFAViesState());fav[productID] = !fav[productID]!;});
+
+
+}).catchError((e){ print('on erorr :'); emit(ErrorFAViesState());fav[productID] = !fav[productID]!;});
 }
+
+
+  ModelGETFavorite? modelGETFavorite ;
+  void getallFAV()
+  {
+    emit(LoadingFAVState());
+    DioHelper.getdata(Url: favorites ,token: token).then((value) {
+      modelGETFavorite = ModelGETFavorite.fromJson(value.data);
+      emit(GETFAViesState());
+    }).catchError((e){print('FAV erorr : ${e.toString()}'); emit(ErorrGETFAViesState()); });
+  }
+
 
 }
 

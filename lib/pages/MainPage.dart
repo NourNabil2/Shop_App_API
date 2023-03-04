@@ -14,7 +14,7 @@ class MainPage extends StatelessWidget
   Widget build(BuildContext context) {
 
     return BlocProvider(
-        create: (context) =>  NewsCubit()..getallCategories()..getAllData(),
+        create: (context) =>  NewsCubit()..getallCategories()..getAllData()..getallFAV(),
         child: BlocConsumer<NewsCubit, NewStates>
         (
         listener: (context, state) {},

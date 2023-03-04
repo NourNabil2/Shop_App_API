@@ -1,23 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop/components/Model_Home.dart';
-
-import '../components/Model_Categories.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
 import '../cubit/cubits.dart';
 import '../cubit/states.dart';
 
 class Favorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    NewsCubit cubit = NewsCubit.get(context)..getallFAV();
     return BlocConsumer<NewsCubit, NewStates>(
-        listener: (BuildContext context, Object? state) {},
+
+        listener: (context, state) {
+        if (state is EnterFAViesState)
+          {
+if ( state.favDatastate.status == true )
+  {
+    FlutterToastr.show('${state.favDatastate.message}' ,backgroundColor: Colors.green, context);
+  }
+else
+  {
+    FlutterToastr.show('${state.favDatastate.message}' ,backgroundColor: Colors.red, context);
+  }
+          }
+        },
         builder: (BuildContext context, state) {
-          return ListView.separated(
+          return state is LoadingFAVState ? Center(child: CircularProgressIndicator(color: Colors.purple,)): 
+          
+          cubit.modelGETFavorite?.data?.data[0] ==null ? Image.asset('assets/empty.gif'):
+          ListView.separated(
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(25.0),
                   child: Container(
                     height: 120,
                     child: Row(
@@ -27,12 +41,12 @@ class Favorite extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image(
-                                image: NetworkImage('assets/1.png'),
+                                image: NetworkImage('${cubit.modelGETFavorite?.data?.data[index].product?.image}'),
                                 height: 100,
                                 width: 100,
                                 fit: BoxFit.cover),
                           ),
-                          if (1 != 0)
+                          if (cubit.modelGETFavorite?.data?.data[index].product?.discount != 0)
                             Container(
                               padding: EdgeInsets.all(4),
                               decoration: BoxDecoration(
@@ -51,7 +65,7 @@ class Favorite extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'name',
+                                '${cubit.modelGETFavorite?.data?.data[index].product?.name}',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(height: 1.3, fontSize: 15),
@@ -59,7 +73,7 @@ class Favorite extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    'prize',
+                                    '${cubit.modelGETFavorite?.data?.data[index].product?.price}',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(color: Colors.blue),
@@ -69,7 +83,7 @@ class Favorite extends StatelessWidget {
                                   ),
                                   if (1 != 0)
                                     Text(
-                                      'old',
+                                      '${cubit.modelGETFavorite?.data?.data[index].product?.oldPrice}',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -80,10 +94,9 @@ class Favorite extends StatelessWidget {
                                   Spacer(),
                                   IconButton(
                                       onPressed: () {
-                                        // cubit.ChangeFAV(model.data?.products[index].id);
+                                        cubit.ChangeFAV(cubit.homeModelData?.data?.products[index].id);
                                       },
-                                      icon: Icon(Icons.favorite)),
-                                  // icon:cubit.fav[model.data?.products[index].id] == false ? Icon( Icons.favorite_border ,) : Icon( Icons.favorite ,color: Colors.red,) )
+                                   icon:cubit.fav[cubit.modelGETFavorite?.data?.data[index].product?.id] == false ? Icon( Icons.favorite_border ,) : Icon( Icons.favorite ,color: Colors.red,) )
                                 ],
                               ),
                             ],
@@ -98,7 +111,7 @@ class Favorite extends StatelessWidget {
                 return SizedBox(height: 10);
               },
               itemCount:
-                  NewsCubit.get(context).categoriesModel!.data!.data.length);
+              cubit.modelGETFavorite!.data!.data.length);
         });
   }
 }
