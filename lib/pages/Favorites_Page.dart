@@ -25,9 +25,9 @@ else
           }
         },
         builder: (BuildContext context, state) {
-          return state is LoadingFAVState ? Center(child: CircularProgressIndicator(color: Colors.purple,)): 
-          
-          cubit.modelGETFavorite?.data?.data[0] ==null ? Image.asset('assets/empty.gif'):
+          return state is LoadingFAVState ? Center(child: CircularProgressIndicator(color: Colors.purple,)) :
+
+          cubit.modelGETFavorite?.data?.data.isEmpty == true ? Center(child: Image(image: AssetImage('assets/empty.gif') ,width: 250 ,)) :
           ListView.separated(
               itemBuilder: (context, index) {
                 return Padding(
