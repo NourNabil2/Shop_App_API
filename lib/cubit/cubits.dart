@@ -15,6 +15,7 @@ import '../main.dart';
 import '../pages/Favorites_Page.dart';
 import '../pages/HomePage.dart';
 import '../pages/Categorise_Page.dart';
+import '../pages/Setting_Page.dart';
 import '../pages/search.dart';
 
 class NewsCubit extends Cubit<NewStates>
@@ -34,7 +35,7 @@ class NewsCubit extends Cubit<NewStates>
 
   ];
   List pages = [
-    search(),
+    Setting(),
     Favorite(),
     HomePage(),
     Caregories(),
