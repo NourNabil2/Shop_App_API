@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_toastr/flutter_toastr.dart';
+import 'package:shop/components/component.dart';
 import '../cubit/cubits.dart';
 import '../cubit/states.dart';
 
@@ -27,7 +28,7 @@ else
         builder: (BuildContext context, state) {
           return state is LoadingFAVState ? Center(child: CircularProgressIndicator(color: Colors.purple,)) :
 
-          cubit.modelGETFavorite?.data?.data.isEmpty == true ? Center(child: Image(image: AssetImage('assets/empty.gif') ,width: 250 ,)) :
+          cubit.modelGETFavorite?.data?.data.isEmpty == true ? EmptyImage('Empty Favorites'):
           ListView.separated(
               itemBuilder: (context, index) {
                 return Padding(

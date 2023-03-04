@@ -11,6 +11,7 @@ class DioHelper {
         BaseOptions(
       baseUrl: 'https://student.valuxapps.com/api/',
       receiveDataWhenStatusError: true,
+          // receiveTimeout: Duration(seconds: 5),
     ));
   }
 

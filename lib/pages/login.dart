@@ -9,6 +9,7 @@ import '../components/Model_login.dart';
 import '../components/component.dart';
 import '../cubit/shop_login_cubit.dart';
 import '../cubit/shop_login_state.dart';
+import '../main.dart';
 import 'MainPage.dart';
 
 
@@ -31,7 +32,7 @@ class _loginState extends State<login> {
       debugShowCheckedModeBanner: false,
       theme: lightthem,
       home: BlocProvider(
-        create: (BuildContext context) => ShopLoginCubit(),
+        create: ( context) => ShopLoginCubit(),
         child:BlocConsumer<ShopLoginCubit, ShopLoginState>(
           listener: (context, state) {
             if (state is LoginEnterState )
@@ -41,6 +42,7 @@ class _loginState extends State<login> {
               FlutterToastr.show('${state.logindata.message}', context, duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
               CashSaver.SaveData(key: 'token', value: state.logindata.data?.token ).then((value)
               {
+                token = state.logindata.data?.token;
                 print('token :');
                 print(state.logindata.data?.token);
                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainPage(),), (Route<dynamic>route) => false);
@@ -101,14 +103,15 @@ class _loginState extends State<login> {
                         Row(children: [
                           Expanded(child:
 
-                         state is! LoginLoadingState ? Mainbottom(onpress: (){
+                         state is! LoginLoadingState ? TextButton(onPressed: (){
                             if(key.currentState!.validate())
                               {
                                 ShopLoginCubit.get(context).userLogin(email: emailcontroller.text, password: passwaordcontroller.text);
 
                               }
 
-                         } , namebottom: 'LOGIN') :  Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent)),
+                         } , child: Text('LOGIN',style: TextStyle(color: Colors.white , fontWeight: FontWeight.w700 ,fontSize: 18 ),))
+                             :  Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent)),
 
 
                           ) ,

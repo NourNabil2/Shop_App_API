@@ -27,16 +27,7 @@ class HomePage extends StatelessWidget {
               FlutterToastr.show('${state.favDatastate.message}', context,duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
             }
 
-          // Mainbottom(namebottom: 'sighout', onpress: () {
-          //   Navigator.pushAndRemoveUntil(
-          //       context, MaterialPageRoute(builder: (context) => login(),), (
-          //       Route<dynamic>route) => false);
-          //   CashSaver.Cleardata(key: 'token');
-          //   FlutterToastr.show('Signed out successfully', context,
-          //       duration: FlutterToastr.lengthLong,
-          //       backgroundColor: Colors.green,
-          //       position: FlutterToastr.bottom);
-          // } );
+
         },
     builder: (context, state) {
       NewsCubit cubit = NewsCubit.get(context);
@@ -55,7 +46,14 @@ class HomePage extends StatelessWidget {
         NewsCubit cubit = NewsCubit.get(context);
         return Scaffold(
           body: Container(
-            color: Colors.grey[300],
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50.0),
+                topRight: Radius.circular(50.0),
+              ),
+            ),
+
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics(),
@@ -91,12 +89,12 @@ class HomePage extends StatelessWidget {
     return BlocConsumer<NewsCubit, NewStates>(
       builder: (BuildContext context, state) {
         return SliverAppBar(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15.0),
-              bottomRight: Radius.circular(15.0),
-            ),
-          ),
+          // shape: const RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.only(
+          //     bottomLeft: Radius.circular(15.0),
+          //     bottomRight: Radius.circular(15.0),
+          //   ),
+          // ),
 
           expandedHeight: 280,
           pinned: true,
@@ -124,6 +122,8 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Container(
+
+
           height: 100.0,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),

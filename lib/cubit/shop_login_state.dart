@@ -21,3 +21,6 @@ class LoginError extends ShopLoginState{
   LoginError(this.error);
 }
 
+class ProfileState extends ShopLoginState{}
+
+class ErrorProfileState extends ShopLoginState{}

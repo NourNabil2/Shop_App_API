@@ -44,7 +44,7 @@ dependencies:
   flutter_toastr:
   curved_navigation_bar:
   carousel_slider:
-  flutter_slider_drawer:
+
 
 dev_dependencies:
   flutter_test:

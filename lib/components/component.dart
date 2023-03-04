@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
+
+import '../Dio_Network/cash_save.dart';
+import '../pages/login.dart';
 
 
 Widget defaultFormField (
@@ -66,15 +70,33 @@ Widget defaultFormField (
 );
 
 
-Widget Mainbottom(
+Widget SignOutbottom(
 {
    required String namebottom,
-   required onpress
-
+required context,
 }
 )
 {
-  return TextButton(onPressed: onpress , style: ButtonStyle(fixedSize: MaterialStatePropertyAll(Size.fromHeight(50))),child: Text(namebottom,style: TextStyle(color: Colors.white , fontWeight: FontWeight.w700 ,fontSize: 18 ) ));
+
+  return TextButton(onPressed: () {
+    Navigator.pushAndRemoveUntil(
+        context, MaterialPageRoute(builder: (context) => login(),), (
+        Route<dynamic>route) => false);
+    CashSaver.Cleardata(key: 'token');
+    FlutterToastr.show('Signed out successfully', context,
+        duration: FlutterToastr.lengthLong,
+        backgroundColor: Colors.green,
+        position: FlutterToastr.bottom);
+  } , style: ButtonStyle(shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),backgroundColor: MaterialStatePropertyAll(Colors.redAccent),fixedSize: MaterialStatePropertyAll(Size.fromHeight(50))),
+      child: Row(children: [
+        Icon(Icons.exit_to_app,color: Colors.black),
+        SizedBox(width: 30,),
+      Text(namebottom,style: TextStyle(color: Colors.white , fontWeight: FontWeight.w700 ,fontSize: 18 ) ),
+        Spacer(),
+
+      ]));
+
+
 }
 
 
@@ -84,7 +106,7 @@ ThemeData lightthem = ThemeData(
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(color: Colors.black),
     backgroundColor: Colors.white,
-    systemOverlayStyle: SystemUiOverlayStyle(systemNavigationBarColor: Colors.redAccent , ),
+    systemOverlayStyle: SystemUiOverlayStyle(systemNavigationBarColor: Colors.grey[500] , ),
     elevation: 0.0,
 
     titleTextStyle: TextStyle(color: Colors.black),
@@ -95,7 +117,7 @@ ThemeData lightthem = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: Colors.deepOrange,
+    selectedItemColor: Colors.black87,
     backgroundColor: Colors.grey[100],
 
   ),
@@ -122,3 +144,13 @@ ThemeData darkthem = ThemeData(
   ),
 );
 
+Widget EmptyImage(String Name)
+{
+return  Column(
+  mainAxisAlignment:MainAxisAlignment.center,
+  children: [
+    Center(child: Image(image: AssetImage('assets/empty.gif') ,width: 250 ,)),
+    Text('${Name}',style: TextStyle(fontSize: 18 ,fontWeight: FontWeight.bold ,color: Colors.grey),)
+  ],
+);
+}

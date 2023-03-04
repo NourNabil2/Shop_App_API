@@ -12,6 +12,7 @@ import '../components/Model_GETfav.dart';
 import '../components/Model_Home.dart';
 import '../components/Model_login.dart';
 import '../main.dart';
+import '../pages/Cart_Page.dart';
 import '../pages/Favorites_Page.dart';
 import '../pages/HomePage.dart';
 import '../pages/Categorise_Page.dart';
@@ -39,6 +40,7 @@ class NewsCubit extends Cubit<NewStates>
     Favorite(),
     HomePage(),
     Caregories(),
+    Cart(),
   ] ;
 void ChangePage (index)
 {
@@ -77,7 +79,6 @@ void getallCategories()
 {
   DioHelper.getdata(Url: categories ,token: token).then((value) {
     categoriesModel = CategoriesModel.fromjson(value.data);
-    print('data fav:222 ');
     emit(EnterCategoriesState());
   }).catchError((e){print('Categories erorr : ${e.toString()}'); emit(ErrorCategoriesState()); });
 }
@@ -132,6 +133,7 @@ DioHelper.postdata(path: favorites,
       emit(GETFAViesState());
     }).catchError((e){print('FAV erorr : ${e.toString()}'); emit(ErorrGETFAViesState()); });
   }
+
 
 
 }

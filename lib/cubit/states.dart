@@ -31,3 +31,5 @@ class ChanheFAVState extends NewStates{}
 class LoadingFAVState extends NewStates{}
 
 class ErorrGETFAViesState extends NewStates{}
+
+
