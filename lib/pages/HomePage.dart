@@ -199,7 +199,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-        ))), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 1.0 ,mainAxisSpacing: 1.0, childAspectRatio: 1/1.88, )) ;
+        ))), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 1.0 ,mainAxisSpacing: 1.0, childAspectRatio: 1/2, )) ;
   }
 
 }
