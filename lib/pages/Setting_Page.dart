@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop/components/Model_login.dart';
 import '../components/component.dart';
 import '../cubit/shop_login_cubit.dart';
 import '../cubit/shop_login_state.dart';
@@ -42,7 +41,8 @@ class Setting extends StatelessWidget {
                     // leading:  IconButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder:  (context) => HomePage(), )); }, icon: Icon(CupertinoIcons.back,color: Colors.black,) ),
                     flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
-                        background: Stack(children:[
+                        background: Stack(
+                            children:[
 
                           Center(
                             child: Column(
@@ -72,6 +72,7 @@ class Setting extends StatelessWidget {
                               ],
                             ),
                           ),
+
                         ] ),
                       stretchModes: [
                         StretchMode.blurBackground,
@@ -89,7 +90,7 @@ class Setting extends StatelessWidget {
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                              boxShadow: [BoxShadow(color: Colors.grey ,blurRadius: 18,blurStyle: BlurStyle.solid ,spreadRadius: 0)],
                             borderRadius: BorderRadius.circular(15)
                           ),
 
@@ -111,20 +112,20 @@ class Setting extends StatelessWidget {
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+          boxShadow: [BoxShadow(color: Colors.grey ,blurRadius: 18,blurStyle: BlurStyle.solid ,spreadRadius: 0)],
                             borderRadius: BorderRadius.circular(15)
                           ),
 
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(children: [
-                              Icon(CupertinoIcons.moon_fill),
+                              Icon(Icons.person),
                               SizedBox(width: 30,),
-                              Text('Thems Mood'),
+                              Text('About Us'),
                               Spacer(),
                               IconButton(onPressed: () {
 
-                              }, icon: Icon(Icons.present_to_all_sharp))
+                              }, icon: Icon(Icons.arrow_forward_ios))
                             ]),
                           ),
                         ),
@@ -133,6 +134,7 @@ class Setting extends StatelessWidget {
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
                           decoration: BoxDecoration(
+                              boxShadow: [BoxShadow(color: Colors.redAccent ,blurRadius: 18,blurStyle: BlurStyle.solid ,spreadRadius: 0)],
                             borderRadius: BorderRadius.circular(15)
                           ),
 

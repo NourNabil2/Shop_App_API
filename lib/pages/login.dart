@@ -11,6 +11,7 @@ import '../cubit/shop_login_cubit.dart';
 import '../cubit/shop_login_state.dart';
 import '../main.dart';
 import 'MainPage.dart';
+import 'RegisterPage.dart';
 
 
 class login extends StatefulWidget {
@@ -100,6 +101,7 @@ class _loginState extends State<login> {
 
                         ),
                         SizedBox(height: 50.0,),
+
                         Row(children: [
                           Expanded(child:
 
@@ -116,7 +118,19 @@ class _loginState extends State<login> {
 
                           ) ,
 
-                        ],)
+                        ],),
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Don\'t have an account?'),
+                              TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => Register(),));}, child: Text('REGISTER NOW',style: TextStyle(color: Colors.purple,backgroundColor: Colors.transparent),),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.transparent)),)
+                            ],
+                          ),
+                        )
+
+
 
 
 
