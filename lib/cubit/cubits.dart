@@ -6,7 +6,6 @@ import 'package:shop/components/Model_Categories.dart';
 import 'package:shop/cubit/states.dart';
 import '../Dio_Network/Dio helper.dart';
 import '../Dio_Network/end_points.dart';
-import '../components/Model_Categories.dart';
 import '../components/Model_FAV.dart';
 import '../components/Model_GETfav.dart';
 import '../components/Model_Home.dart';
@@ -17,7 +16,7 @@ import '../pages/Favorites_Page.dart';
 import '../pages/HomePage.dart';
 import '../pages/Categorise_Page.dart';
 import '../pages/Setting_Page.dart';
-import '../pages/search.dart';
+
 
 class NewsCubit extends Cubit<NewStates>
 {
@@ -93,11 +92,9 @@ void getallCategories()
 
 void ChangeFAV(int productID)
 {
-
-
   fav[productID] = !fav[productID]!;
   emit(ChanheFAVState());
-
+  emit(LoadingFAVState());
 DioHelper.postdata(path: favorites,
     token: token,
     data:{
@@ -114,6 +111,7 @@ DioHelper.postdata(path: favorites,
   else
     {
     emit(LoadingFAVState())
+
     },
 
       emit(EnterFAViesState(favData!)),

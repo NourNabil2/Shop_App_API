@@ -82,7 +82,7 @@ else
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  if (1 != 0)
+                                  if (cubit.modelGETFavorite?.data?.data[index].product?.discount != 0)
                                     Text(
                                       '${cubit.modelGETFavorite?.data?.data[index].product?.oldPrice}',
                                       maxLines: 1,

@@ -59,120 +59,91 @@ class _loginState extends State<Register> {
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
                   key: key ,
-                  child: Expanded(
-                    child: Column(
+                  child: ListView(
 
-                        children: [
-                          Expanded(child: Text('Register' , style:TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)),
-                          SizedBox(height: 100.0,),
-                          defaultFormField(controller: namecontroller, autofocus: true ,type: TextInputType.name, lable: 'Name', icon: Icons.person, onChange: null,onFieldSubmitted: null,
-                            valid:  (value)
-                            {
-                              if (value.isEmpty)
-                              {
-                                return ('Name must not be empty !!');
-                              }
-                              return null;
-                            },
-                          ),
-                          Expanded(child: SizedBox(height: 10.0,)),
-                          defaultFormField(controller: emailcontroller, autofocus: true ,type: TextInputType.emailAddress, lable: 'Email', icon: Icons.email_outlined, onChange: null,onFieldSubmitted: null,
-                            valid:  (value)
-                            {
-                              if (value.isEmpty)
-                              {
-                                return ('Email must not be empty !!');
-                              }
-                              return null;
-                            },
-                          ),
-                          Expanded(child: SizedBox(height: 10.0,)),
-                          defaultFormField(controller: phonecontroller, autofocus: true ,type: TextInputType.phone, lable: 'phone', icon: Icons.phone, onChange: null,onFieldSubmitted: null,
-                            valid:  (value)
-                            {
-                              if (value.isEmpty)
-                              {
-                                return ('Phone must not be empty !!');
-                              }
-                              return null;
-                            },
-                          ),
-                          Expanded(child: SizedBox(height: 10.0,)),
-                          defaultFormField(controller: passwaordcontroller, type: TextInputType.visiblePassword, lable: 'Password', icon: Icons.lock ,icon2: ShopRegisterCubit.get(context).suffix ,onChange: null, onFieldSubmitted:  (value){if(key.currentState!.validate())
+                      children: [
+                        Text('Register' , style:TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 100.0,),
+                        defaultFormField(controller: namecontroller, autofocus: true ,type: TextInputType.name, lable: 'Name', icon: Icons.person, onChange: null,onFieldSubmitted: null,
+                          valid:  (value)
                           {
-                            ShopRegisterCubit.get(context).userRegister(email: emailcontroller.text, password: passwaordcontroller.text, name: namecontroller.text, phone: phonecontroller.text);
-                          }
-                          },
-                            obscureText: ShopRegisterCubit.get(context).passowrdhiddin,
-                            onPressedsuffixIcon:  (){ShopRegisterCubit.get(context).Passwordhidden();},
-                            valid:  (value)
+                            if (value.isEmpty)
                             {
-                              if (value.isEmpty)
-                              {
-                                return ('Password must not be empty !!');
-                              }
-                              return null;
-                            },
+                              return ('Name must not be empty !!');
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10.0,),
+                        defaultFormField(controller: emailcontroller, autofocus: true ,type: TextInputType.emailAddress, lable: 'Email', icon: Icons.email_outlined, onChange: null,onFieldSubmitted: null,
+                          valid:  (value)
+                          {
+                            if (value.isEmpty)
+                            {
+                              return ('Email must not be empty !!');
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10.0,),
+                        defaultFormField(controller: phonecontroller, autofocus: true ,type: TextInputType.phone, lable: 'phone', icon: Icons.phone, onChange: null,onFieldSubmitted: null,
+                          valid:  (value)
+                          {
+                            if (value.isEmpty)
+                            {
+                              return ('Phone must not be empty !!');
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10.0,),
+                        defaultFormField(controller: passwaordcontroller, type: TextInputType.visiblePassword, lable: 'Password', icon: Icons.lock ,icon2: ShopRegisterCubit.get(context).suffix ,onChange: null, onFieldSubmitted:  (value){if(key.currentState!.validate())
+                        {
+                          ShopRegisterCubit.get(context).userRegister(email: emailcontroller.text, password: passwaordcontroller.text, name: namecontroller.text, phone: phonecontroller.text);
+                        }
+                        },
+                          obscureText: ShopRegisterCubit.get(context).passowrdhiddin,
+                          onPressedsuffixIcon:  (){ShopRegisterCubit.get(context).Passwordhidden();},
+                          valid:  (value)
+                          {
+                            if (value.isEmpty)
+                            {
+                              return ('Password must not be empty !!');
+                            }
+                            return null;
+                          },
 
-                          ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          Expanded(child: SizedBox(height: 50.0,)),
-
-                          Row(children: [
-                            Expanded(child:
-
-                            state is! RegisterLoadingState ? TextButton(onPressed: (){
-                              if(key.currentState!.validate())
-                              {
-                                ShopRegisterCubit.get(context).userRegister(email: emailcontroller.text, password: passwaordcontroller.text, name: namecontroller.text, phone: phonecontroller.text);
-
-                              }
-
-                            } , child: Text('Register',style: TextStyle(color: Colors.white , fontWeight: FontWeight.w700 ,fontSize: 18 ),))
-                                :  Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent)),
-
-
-                            ) ,
-
-                          ],),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Do have an account?'),
-                                TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Login NOW',style: TextStyle(color: Colors.purple,backgroundColor: Colors.transparent),),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.transparent)),)
-                              ],
-                            ),
-                          )
+                        ),
 
 
+                        SizedBox(height: 50.0,),
+
+                        Row(children: [
+                          Expanded(child:
+
+                          state is! RegisterLoadingState ? TextButton(onPressed: (){
+                            if(key.currentState!.validate())
+                            {
+                              ShopRegisterCubit.get(context).userRegister(email: emailcontroller.text, password: passwaordcontroller.text, name: namecontroller.text, phone: phonecontroller.text);
+
+                            }
+
+                          } , child: Text('Register',style: TextStyle(color: Colors.white , fontWeight: FontWeight.w700 ,fontSize: 18 ),))
+                              :  Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent)),
 
 
+                          ) ,
 
-
-
-
-
-                        ]),
-                  ),
+                        ],),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Do have an account?'),
+                            TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Login NOW',style: TextStyle(color: Colors.purple,backgroundColor: Colors.transparent),),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.transparent)),)
+                          ],
+                        )
+                      ]),
                 ),
               ),
             );

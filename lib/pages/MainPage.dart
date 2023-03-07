@@ -21,20 +21,8 @@ class MainPage extends StatelessWidget {
           return Scaffold(
 
             bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30),
-                    topLeft: Radius.circular(30)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12, spreadRadius: 5, blurRadius: 10),
-                ],
-              ),
+
               child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
-                ),
                 child: BottomAppBar(
                   shape: CircularNotchedRectangle(),
                   notchMargin: 8.0,
