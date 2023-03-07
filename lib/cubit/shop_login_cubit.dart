@@ -47,6 +47,29 @@ class ShopLoginCubit extends Cubit<ShopLoginState> {
     }).catchError((e){print('Profile erorr : ${e.toString()}'); emit(ErrorProfileState()); });
   }
 
+  void UpdataProfile({
+    required String name ,
+    required String email,
+    required String phone,
+    required String password,
+
+})
+  {
+    DioHelper.putdata(token: token, path: Updata,
+        data: {
+          'name' : name ,
+          'phone' : phone ,
+          'email' : email ,
+          'password' : password,
+
+        }
+        ).then((value) {
+      UserData = ShopModelData.fromJson(value.data);
+      print(value.data.toString());
+      emit(UpdataEnterState(UserData!));
+    }).catchError((e){print('Profile erorr : ${e.toString()}'); emit(ErrorUpdataState()); });
+  }
+
 
 
 

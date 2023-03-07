@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../Dio_Network/Dio helper.dart';
+import '../Dio_Network/end_points.dart';
 import '../components/Model_Register.dart';
 
 part 'shop_register_state.dart';
@@ -13,7 +14,7 @@ class ShopRegisterCubit extends Cubit<ShopRegisterState> {
   ShopRegisterCubit() : super(ShopRegisterInitial());
 
   static ShopRegisterCubit get(context) => BlocProvider.of(context);
-  ShopRegisterCubitModelData? loginData;
+  ShopRegisterCubitModelData? registerData;
 
   void userRegister({
     required String email,
@@ -24,7 +25,7 @@ class ShopRegisterCubit extends Cubit<ShopRegisterState> {
     emit(RegisterLoadingState());
 
     DioHelper.postdata(
-        path: 'register',
+        path: register,
         data: {
           'name' : name,
           'phone' : phone,
@@ -32,11 +33,12 @@ class ShopRegisterCubit extends Cubit<ShopRegisterState> {
           'password': password,
         }
     ).then((data) {
-      loginData = ShopRegisterCubitModelData.fromJson(data.data);                // Model Data
-      emit(RegisterEnterState(loginData!));
+      registerData = ShopRegisterCubitModelData.fromJson(data.data);                // Model Data
+      emit(RegisterEnterState(registerData!));
     }
 
     ).catchError((e){
+      print('register Erorr:');
       print(e);
       emit(LoginError(e.toString()));});
   }

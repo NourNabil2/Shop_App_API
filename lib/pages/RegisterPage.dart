@@ -32,24 +32,23 @@ class _loginState extends State<Register> {
           listener: (context, state) {
             if (state is RegisterEnterState )
             {
-              if(state.logindata.status == true )
+              if(state.registerData.status == true )
               {
-                FlutterToastr.show('${state.logindata.message}', context, duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
-                emailcontroller.clear();
-                namecontroller.clear();
-                passwaordcontroller.clear();
-                phonecontroller.clear();
-               
-                // CashSaver.SaveData(key: 'token', value: state.logindata.data?.token ).then((value)
-                // {
-                //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainPage(),), (Route<dynamic>route) => false);
-                //   passwaordcontroller.clear();
-                //
-                // });
+                FlutterToastr.show('${state.registerData.message}', context, duration: FlutterToastr.lengthLong, backgroundColor: Colors.green,position: FlutterToastr.bottom);
+
+                CashSaver.SaveData(key: 'token', value: state.registerData.data?.token ).then((value)
+                {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainPage(),), (Route<dynamic>route) => false);
+                  emailcontroller.clear();
+                  namecontroller.clear();
+                  passwaordcontroller.clear();
+                  phonecontroller.clear();
+
+                });
               }
               else
               {
-                FlutterToastr.show('${state.logindata.message}', context, duration: FlutterToastr.lengthLong,backgroundColor: Colors.redAccent ,position:  FlutterToastr.bottom);
+                FlutterToastr.show('${state.registerData.message}', context, duration: FlutterToastr.lengthLong,backgroundColor: Colors.redAccent ,position:  FlutterToastr.bottom);
               }
             }
           },

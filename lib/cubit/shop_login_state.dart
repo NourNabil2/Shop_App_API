@@ -13,6 +13,7 @@ class LoginEnterState extends ShopLoginState{
 
 class LoginLoadingState extends ShopLoginState{}
 
+
 class PasswordHiddeState extends ShopLoginState{}
 
 class LoginError extends ShopLoginState{
@@ -28,3 +29,15 @@ class ProfileState extends ShopLoginState{
 }
 
 class ErrorProfileState extends ShopLoginState{}
+
+
+
+class UpdataEnterState extends ShopLoginState{
+  final ShopModelData logindata;
+
+  UpdataEnterState(this.logindata);
+}
+
+class UpdataLoadingState extends ShopLoginState{}
+
+class ErrorUpdataState extends ShopLoginState{}

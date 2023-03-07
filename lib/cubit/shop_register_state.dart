@@ -6,9 +6,9 @@ abstract class ShopRegisterState {}
 class ShopRegisterInitial extends ShopRegisterState {}
 
 class RegisterEnterState extends ShopRegisterState{
-  final ShopRegisterCubitModelData logindata;
+  final ShopRegisterCubitModelData registerData;
 
-  RegisterEnterState(this.logindata);
+  RegisterEnterState(this.registerData);
 }
 
 class RegisterLoadingState extends ShopRegisterState{}

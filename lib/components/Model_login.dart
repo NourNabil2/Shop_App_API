@@ -10,7 +10,7 @@ class ShopModelData
   {
     status = json['status'];
     message = json['message'];
-    data=datalogin.fromJson(json['data']);
+    data = json['data'] != null ? new datalogin.fromJson(json['data']) : null;
 
 }
 
