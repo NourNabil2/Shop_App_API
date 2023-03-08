@@ -14,16 +14,16 @@ The screenshots below are taken on a android emulator.
 
 | 1 | 2|
 |------|-------|
-|<img src="./screenshots/1.png" width="300">|<img src="screenshots/2.png" width="300">|
+|<img src="REVIEW (not complete)/Screenshot 2023-03-09 000817.png" width="300">|<img src="REVIEW (not complete)/Screenshot 2023-03-09 001058.png" width="300">|
 
 | 3 | 4|
 |------|-------|
-|<img src="screenshots/3.png" width="300">|<img src="screenshots/4.png" width="300">|
+|<img src="REVIEW (not complete)/Screenshot 2023-03-09 000921.png" width="300">|<img src="REVIEW (not complete)/Screenshot 2023-03-09 000942.png" width="300">|
 
 
-| 5 | 6|
-|------|-------|
-|<img src="screenshots/5.png" width="300">|<img src="screenshots/6.png" width="300">|
+| 5 | 
+|------|
+|<img src="REVIEW (not complete)/Screenshot 2023-03-09 001036.png" width="300">|
 
 
 
