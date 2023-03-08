@@ -7,7 +7,7 @@ A Flutter API - UI Shopping App.
 
 Don't forget to star⭐ the repo if you like what you see😉.
 # 🎥 Demo
-![demo](./REVIEW (not complete)/app review .mb4)
+<img src="REVIEW (not complete)/app review .gif" width="400" height="600">
 
 # 📸 Screenshots
 The screenshots below are taken on a android emulator.
