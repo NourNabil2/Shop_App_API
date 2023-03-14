@@ -3,7 +3,7 @@
 A Flutter API - UI Shopping App.
 
 
-<a href="[build\app\outputs\flutter-apk\app-release.apk](https://drive.google.com/file/d/1nL3srKQ5wAv_8JYOZ_Zg95e-d3BuZ9V1/view?usp=sharing)"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
+<a href="https://drive.google.com/file/d/1nL3srKQ5wAv_8JYOZ_Zg95e-d3BuZ9V1/view?usp=sharing"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
 
 Don't forget to star⭐ the repo if you like what you see😉.
 # 🎥 Demo
