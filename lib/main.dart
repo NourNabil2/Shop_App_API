@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shop/pages/MainPage.dart';
-import 'package:shop/pages/login.dart';
-import 'package:shop/pages/onboarding.dart';
-import 'Dio_Network/Dio helper.dart';
-import 'Dio_Network/cash_save.dart';
-import 'components/component.dart';
+import 'Core/Netawork/Dio_Network/Dio helper.dart';
+import 'Core/Netawork/Dio_Network/cash_save.dart';
+import 'Core/Utilts/onboarding.dart';
+import 'Core/widgets/component.dart';
+import 'Features/Auth/View/login.dart';
+import 'Features/main page/view/MainPage.dart';
 String? token;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
